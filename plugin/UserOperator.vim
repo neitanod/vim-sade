@@ -35,26 +35,21 @@ function! UserOperatorRun(vt, ...)
     
     "echomsg " Lines ".sl." a ".el." - Columns ".sc." a ".ec
     
-    "norm! '<v'>"ay
-    norm `<v`>"aygv
-    "ay"ap
-    "exe 'norm! o<esc>p'
-"    exe 'norm! '.sl.'gg'
-"    norm! 0
-"    if(sc > 1)
-"      exe 'norm! '.(sc-1).'l'
-"    endif
-"    norm! v
-"    exe 'norm! '.el.'gg'
-"    norm! 0
-"    if(ec > 1)
-"      exe 'norm! '.(ec-1).'l'
-"    endif
+    exe 'norm! '.sl.'gg'
+    norm! 0
+    if(sc > 1)
+      exe 'norm! '.(sc-1).'l'
+    endif
+    norm! v
+    exe 'norm! '.el.'gg'
+    norm! 0
+    if(ec > 1)
+      exe 'norm! '.(ec-1).'l'
+    endif
   else
-    norm! "aygv
+    norm! gv
   endif
-"  exe 'norm! <Esc>'
-"  norm! gv"ay
+  norm! "aygv
   let g:UserOperatorLastText=@a
   let @a=old_yank
   "echomsg "Yanked: ".g:UserOperatorLastText
@@ -64,7 +59,8 @@ function! UserOperatorRun(vt, ...)
 endfun
 
 function! UserOperatorRepeat()
-   "echom 'norm '.a:key.g:UserOperatorLastMotion
+   echom 'norm '.a:key.g:UserOperatorLastMotion
+   return
    if g:UserOperatorLastMotion == ''
      norm! gv
      exe 'norm '.g:UserOperatorLastRun
