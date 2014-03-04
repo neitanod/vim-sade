@@ -107,9 +107,10 @@ function! sade#RunVisual(vt, ...)
       call sade#GoToLine(sl) 
       norm! V
       call sade#GoToLine(el) 
-    elseif vt=='block' || vt=='<C-v>' || vt=='<c-v>'
+    else    
+      "vt=='block' || vt=='<C-v>' || vt=='<c-v>' || vt=='^V'
       call sade#GoToLineCol(sl, sc) 
-      exe 'norm! \<c-v>'
+      exe "norm! \<C-v>"
       call sade#GoToLineCol(el, ec) 
     endif
   else
