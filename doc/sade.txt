@@ -1,4 +1,4 @@
-*sade.txt*             Smooth operators (with minimum waste and maximum joy)
+*vim-sade.txt*         Smooth operators (with minimum waste and maximum joy)
 
 Version 0.0.1
 Copyright (C) 2014 Sebastian Grignoli <http://10callclear.blogspot.com.ar/>
