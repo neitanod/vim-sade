@@ -38,24 +38,24 @@ Wishlist		|sade-wishlist|
 ==============================================================================
 INTRODUCTION					*sade-introduction*
 
-*sade* is a Vim plugin to facilitate the creation of |operators| that work 
+*sade* is a Vim plugin to facilitate the creation of |operators| that work
 exactly like Vim's native operators: d, c, y, etc.
 
 Why the name?   No need to ask!   http://www.youtube.com/watch?v=4TYv2PhG89A
 
 The goal of this plugin is to give the user a way to define functions and map
-them to normal mode and visual mode command keys in a way that can be used 
+them to normal mode and visual mode command keys in a way that can be used
 with visual selections as well as Vim's motions and text objects, both native
 and user created, without having to write code to deal with that functionality
 in particular.
 
-It was conceived to work alongside Kana Natsuno's vim-textobj-user plugin 
-(https://github.com/kana/vim-textobj-user), which allows the user to easily 
+It was conceived to work alongside Kana Natsuno's vim-textobj-user plugin
+(https://github.com/kana/vim-textobj-user), which allows the user to easily
 define text objects.
- 
-Operators created with this plugin will be able to easily access selected 
-text. All text-objects, motions and visual selections will be normalized into 
-regular visual selections before calling the operator function.  Also, all 
+
+Operators created with this plugin will be able to easily access selected
+text. All text-objects, motions and visual selections will be normalized into
+regular visual selections before calling the operator function.  Also, all
 operators should be repeatable thrugh the '.' dot command.
 
 
@@ -64,12 +64,12 @@ Requirements:
 - Vim 7.4 or later (not tested on previous versions)
 
 Installation:
-- Using pathogen:  
+- Using pathogen:
     cd ~/.vimconfig/bundle
-    git clone https://github.com/neitanod/vim-sade.git 
+    git clone https://github.com/neitanod/vim-sade.git
 
 Latest version:
-https://github.com/neitanod/vim-sade 
+https://github.com/neitanod/vim-sade
 
 
 
@@ -82,34 +82,34 @@ DESCRIPTION					*sade-description*
 FUNCTIONS					*sade-functions*
 
 sade#Func(key, function_name)              *sade#Func*
-			Creates an operator that will call the specified 
+			Creates an operator that will call the specified
 			function.  It will be called without parameters, but
 			it will be able to collect information from several
 			global variables.  See |sade-available-variables|.
 			Regardless of the way the operator was called, it will
 			always start in Visual mode (could be characterwise
-			visual mode, linewise visual mode, or visual block 
+			visual mode, linewise visual mode, or visual block
 			mode).  The target text will be selected, even when
 			it was specified through a motion or text object in
 			normal mode.
 
 sade#Map(key, commands_string)             *sade#Map*
-			Creates an operator that will executed the normal 
+			Creates an operator that will executed the normal
 			mode commands passed in commands_string.
-			It will use "execute normal <commands_string>", so 
+			It will use "execute normal <commands_string>", so
 		        you have to escape special chars whith "\".  It will
 		        use other mappings.  If you want to ignore other
 		        mappings (just like noremap would) use |sade#NoReMap|
 		        instead.
 			Regardless of the way the operator was called, it will
 			always start in Visual mode (could be characterwise
-			visual mode, linewise visual mode, or visual block 
+			visual mode, linewise visual mode, or visual block
 			mode).  The target text will be selected, even when
 			it was specified through a motion or text object in
 			normal mode.
 
 sade#NoReMap(key, commands_string)         *sade#NoReMap*
-			Creates an operator that will executed the normal 
+			Creates an operator that will executed the normal
 			mode commands passed in commands_string.
 			It will use "execute normal! <commands_string>".
 			(It's like sade#Map except non recursive.)
@@ -121,8 +121,8 @@ AVAILABLE VARIABLES				*sade-available-variables*
 When the function mapped with |sade#Func| gets called, it can read from
 several global variables that sade sets.  It's not recommended to try to use
 them from sade#Map and sade#NoReMap because it's easy to confuse the "mapping
-time" with the "execution time".  These variables are set at execution time, 
-but do not exist yet at mapping time (or have incorrect values related to old 
+time" with the "execution time".  These variables are set at execution time,
+but do not exist yet at mapping time (or have incorrect values related to old
 runs of mapped functions).
 
 g:sade#LastText                            *sade#LastText*
@@ -130,29 +130,29 @@ g:sade#LastText                            *sade#LastText*
 
 g:sade#LastVisualMode                      *sade#LastVisualMode*
 			The visual mode of last run's selected text.  If the
-			operator was called from linewise visual mode or a 
-			normal mode linewise motion like "j" it will be 'V' or 
-			'line'.  
-			If it was called from characterwise visual mode or a 
-			characterwise normal mode motion like "w", it will be 
-			'v' or 'char'.  If it was called from visual block mode 
+			operator was called from linewise visual mode or a
+			normal mode linewise motion like "j" it will be 'V' or
+			'line'.
+			If it was called from characterwise visual mode or a
+			characterwise normal mode motion like "w", it will be
+			'v' or 'char'.  If it was called from visual block mode
 			it will be "\<c-V>" or "block"
 
 g:sade#StartingLine                        *sade#StartingLine*
-                        Line number of the first line of the selection 
+                        Line number of the first line of the selection
 
 g:sade#EndingLine                          *sade#EndingLine*
-                        Line number of the last line of the selection  
+                        Line number of the last line of the selection
 
 g:sade#StartingColumn                      *sade#StartingColumn*
                         Number of the position in the line of the first
-                        character of the selection.  It always refers to the 
+                        character of the selection.  It always refers to the
                         original selection, not the one that is effective when
                         the command is repeated though the dot command.
 
 g:sade#EndingColumn                        *sade#EndingColumn*
                         Number of the position in the line of the last
-                        character of the selection.  It always refers to the 
+                        character of the selection.  It always refers to the
                         original selection, not the one that is effective when
                         the command is repeated though the dot command.
 
@@ -164,20 +164,20 @@ g:sade#Repeating                           *sade#Repeating*
 ==============================================================================
 EXAMPLES					*sade-examples*
 
-In this example we are going to add a simple operator that will take the 
+In this example we are going to add a simple operator that will take the
 selection and comment it out with /* and */ delimiters.
 
 First of all, we need sade.vim
 
       source /home/sebas/vimconfig/bundle/vim-sade/plugin/sade.vim
-    
+
 
 Then, we can create a simple mapping:
 
       call sade#Map('gB',"di/*\<esc>gpi*/\<esc>")
-    
-Now we can visually select text and call gB, or call it in normal mode with 
-gBiW to coment a WORD, or gBw to comment the rest of current word. 
+
+Now we can visually select text and call gB, or call it in normal mode with
+gBiW to coment a WORD, or gBw to comment the rest of current word.
 
 We can also create a function and map it directly by name:
 
@@ -186,10 +186,10 @@ We can also create a function and map it directly by name:
         let @a="Inspect(".g:sade#LastText.")"
         normal! "ap
       endfunction
-      
+
       call sade#Func('gb','Inspect')
 
-This allows us to use the |sade-available-variables| (like sade#LastText) inside 
+This allows us to use the |sade-available-variables| (like sade#LastText) inside
 the functions if necessary.
 
 
@@ -197,7 +197,7 @@ the functions if necessary.
 BUGS						*sade-bugs*
 
 - It sometimes get the selection closing off by one character.
- 
+
 
 
 ==============================================================================
