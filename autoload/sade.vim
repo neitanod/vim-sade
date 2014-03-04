@@ -3,6 +3,7 @@ if exists("sade#Loaded")
 endif
 let sade#Loaded = 1
 
+let g:sade#Repeating = 0 
 let g:sade#Defined = {}
 let g:sade#Mappings = {}
 
@@ -29,12 +30,13 @@ endfun
 function! sade#HookNormal(key)
   "echom "HookNormal"
   let g:sade#LastRun=a:key
+  let g:sade#Repeating=0
   set opfunc=sade#RunNormal
 endfun
 
 function! sade#RunNormal(vt, ...)
   "echom "RunNormal"
-  echom "Visualmode: ".a:vt
+  "echom "Visualmode: ".a:vt
   let g:sade#LastVisualMode=a:vt
   
   " get target's coordinates
@@ -75,6 +77,7 @@ function! sade#RunNormal(vt, ...)
   norm! gv
   "echom 'call '.g:sade#Defined[g:sade#LastRun]
   exe 'call '.g:sade#Defined[g:sade#LastRun]
+  let g:sade#Repeating=1
   "let &selection = sel_save
 endfun
 
