@@ -3,7 +3,7 @@ if exists("sade#Loaded")
 endif
 let sade#Loaded = 1
 
-let g:sade#Repeating = 0 
+let g:sade#Repeating = 0
 let g:sade#Defined = {}
 let g:sade#Mappings = {}
 
@@ -38,12 +38,12 @@ function! sade#RunNormal(vt, ...)
   "echom "RunNormal"
   "echom "Visualmode: ".a:vt
   let g:sade#LastVisualMode=a:vt
-  
+
   " get target's coordinates
   let [sl, sc] = getpos(a:0?"'<":"'[")[1:2]
   let [el, ec] = getpos(a:0?"'>":"']")[1:2]
 
-  "echom "sl: ".sl."  sc: ".sc."  el: ".el."  ec: ".ec 
+  "echom "sl: ".sl."  sc: ".sc."  el: ".el."  ec: ".ec
 
   let g:sade#StartingLine   = sl
   let g:sade#EndingLine     = el
@@ -53,19 +53,19 @@ function! sade#RunNormal(vt, ...)
   "let sel_save = &selection
   "let &selection = "inclusive"
 
-  if a:vt=='char' || a:vt=='v' 
-    call sade#GoToLineCol(sl, sc) 
+  if a:vt=='char' || a:vt=='v'
+    call sade#GoToLineCol(sl, sc)
     norm! v
-    call sade#GoToLineCol(el, ec) 
+    call sade#GoToLineCol(el, ec)
   elseif a:vt=='line' || a:vt=='V'
-    call sade#GoToLine(sl) 
+    call sade#GoToLine(sl)
     norm! V
-    call sade#GoToLine(el) 
-  else 
+    call sade#GoToLine(el)
+  else
     " a:vt=='block' || a:vt=="\<C-V>"
-    call sade#GoToLineCol(sl, sc) 
+    call sade#GoToLineCol(sl, sc)
     exe 'norm! \<c-v>'
-    call sade#GoToLineCol(el, ec) 
+    call sade#GoToLineCol(el, ec)
   endif
   " capture target's current text
   let old_yank=@a
@@ -98,8 +98,8 @@ function! sade#HookVisual(key)
   let [sl, sc] = getpos("'<")[1:2]
   let [el, ec] = getpos("'>")[1:2]
 
-  "echom "sl: ".sl."  sc: ".sc."  el: ".el."  ec: ".ec 
-  
+  "echom "sl: ".sl."  sc: ".sc."  el: ".el."  ec: ".ec
+
   let g:sade#StartingLine   = sl
   let g:sade#EndingLine     = el
   let g:sade#StartingColumn = sc
@@ -115,28 +115,28 @@ function! sade#RunVisual(vt, ...)
   let el = g:sade#EndingLine
   let sc = g:sade#StartingColumn
   let ec = g:sade#EndingColumn
-  "echom "sl: ".sl."  sc: ".sc."  el: ".el."  ec: ".ec 
-  
+  "echom "sl: ".sl."  sc: ".sc."  el: ".el."  ec: ".ec
+
   "let sel_save = &selection
   "let &selection = "inclusive"
-  
+
   if g:sade#Repeating==0
     exe 'norm! \<esc>'
-    if vt=='char' || vt=='v' 
+    if vt=='char' || vt=='v'
       " our target is a text object or motion
       " visually select it
-      call sade#GoToLineCol(sl, sc) 
+      call sade#GoToLineCol(sl, sc)
       norm! v
-      call sade#GoToLineCol(el, ec) 
+      call sade#GoToLineCol(el, ec)
     elseif vt=='line' || vt=='V'
-      call sade#GoToLine(sl) 
+      call sade#GoToLine(sl)
       norm! V
-      call sade#GoToLine(el) 
-    else    
+      call sade#GoToLine(el)
+    else
       "vt=='block' || vt=="\<C-V>"
-      call sade#GoToLineCol(sl, sc) 
+      call sade#GoToLineCol(sl, sc)
       exe "norm! \<C-v>"
-      call sade#GoToLineCol(el, ec) 
+      call sade#GoToLineCol(el, ec)
     endif
   else
     "echom "Repeating"
@@ -196,4 +196,3 @@ function! sade#GoToCol(c)
   norm! 0
   call sade#MoveCols(a:c)
 endfun
-
