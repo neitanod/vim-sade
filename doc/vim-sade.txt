@@ -1,4 +1,4 @@
-*vim-sade.txt*         Smooth operators (with minimum waste and maximum joy)
+*vim-sade.txt*   *sade*      Smooth operators (with minimum waste and maximum joy)
 
 Version 0.0.1
 Copyright (C) 2014 Sebastian Grignoli <http://10callclear.blogspot.com.ar/>
@@ -38,7 +38,7 @@ Wishlist		|sade-wishlist|
 ==============================================================================
 INTRODUCTION					*sade-introduction*
 
-*sade* is a Vim plugin to facilitate the creation of |operators| that work
+sade is a Vim plugin to facilitate the creation of |operators| that work
 exactly like Vim's native operators: d, c, y, etc.
 
 Why the name?   No need to ask!   http://www.youtube.com/watch?v=4TYv2PhG89A
