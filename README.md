@@ -1,6 +1,12 @@
 
+    " Relatively simple operators can be defines as mappings
+    " they are called with "normal!", so we must escape special chars with \
 
-    " Let's define an operator:
+    " Let's define "Paste before" and "Paste after" operator mappings
+    call sade#Map("(p","\<esc>`<P")
+    call sade#Map(")p","\<esc>`>p")
+
+    " Let's define an operator function:
     call UserOperatorFunc('b','Test')
 
     func! Test()

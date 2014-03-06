@@ -9,22 +9,22 @@ let g:sade#Mappings = {}
 
 function! sade#Func(key, func)
   let g:sade#Defined[a:key]=a:func."()"
-  exe "nnoremap ".a:key." :call sade#HookNormal('".a:key."')<cr>g@"
-  exe "vnoremap ".a:key." <esc>:call sade#HookVisual('".a:key."')<cr><esc>g@w"
+  exe "nnoremap <silent> ".a:key." :call sade#HookNormal('".a:key."')<cr>g@"
+  exe "vnoremap <silent> ".a:key." <esc>:call sade#HookVisual('".a:key."')<cr><esc>g@w"
 endfun
 
 function! sade#Map(key, map)
   let g:sade#Defined[a:key]='sade#RunMap("'.a:key.'")'
   let g:sade#Mappings[a:key]=a:map
-  exe "nnoremap ".a:key." :call sade#HookNormal('".a:key."')<cr>g@"
-  exe "vnoremap ".a:key." <esc>:call sade#HookVisual('".a:key."')<cr><esc>g@w"
+  exe "nnoremap <silent> ".a:key." :call sade#HookNormal('".a:key."')<cr>g@"
+  exe "vnoremap <silent> ".a:key." <esc>:call sade#HookVisual('".a:key."')<cr><esc>g@w"
 endfun
 
 function! sade#NoReMap(key, map)
   let g:sade#Defined[a:key]='sade#RunNoReMap("'.a:key.'")'
   let g:sade#Mappings[a:key]=a:map
-  exe "nnoremap ".a:key." :call sade#HookNormal('".a:key."')<cr>g@"
-  exe "vnoremap ".a:key." <esc>:call sade#HookVisual('".a:key."')<cr><esc>g@w"
+  exe "nnoremap <silent> ".a:key." :call sade#HookNormal('".a:key."')<cr>g@"
+  exe "vnoremap <silent> ".a:key." <esc>:call sade#HookVisual('".a:key."')<cr><esc>g@w"
 endfun
 
 function! sade#HookNormal(key)
