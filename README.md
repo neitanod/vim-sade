@@ -6,6 +6,11 @@
     call sade#Map("(p","\<esc>`<P")
     call sade#Map(")p","\<esc>`>p")
 
+    " This one will convert "script" into "<script>|</script>"
+    " (the | represents the cursor position after invoking)
+    call sade#Map("Qt", "di<\<esc>gpi>\<esc>mpa</\<esc>gpi>\<esc>`pll\<cr>")
+
+
     " Let's define an operator function:
     call UserOperatorFunc('b','Test')
 
